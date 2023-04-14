@@ -33,3 +33,7 @@ Tentative/Maybe
 
 
 
+
+## Mistakes
+
+- Image folder https://stackoverflow.com/questions/62128019/unable-to-import-image-in-reactjs-returning-error-module-not-found-cant-resolv
