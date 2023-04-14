@@ -1,4 +1,4 @@
-import beadyEyes from './assets/beady-eyes.png'
+import beadyEyes from '../assets/beady-eyes.png'
 
 const Gallery = () => {
 	return (

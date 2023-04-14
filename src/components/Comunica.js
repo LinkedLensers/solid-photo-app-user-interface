@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
+
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 const myEngine = new QueryEngine();
 
 const Comunica = () => {
+
+	useEffect(() => {
+       console.log('in Comunica useEffect()')
+
 
 	const testQuery = async () => {
 
@@ -33,16 +39,18 @@ const Comunica = () => {
 		});
 	}
 
-  testQuery()
+	testQuery()
 
 
-	return (
-		<div className="bg-red-200">
-			<p className="">
-				Comunica
-			</p>
-		</div>
-	);
+   }, []) // only do this once
+
+return (
+	<div className="bg-red-200">
+		<p className="">
+			Comunica
+		</p>
+	</div>
+);
 
 }
 

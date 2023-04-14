@@ -13,6 +13,7 @@
 Other
 
 - [Inrupt JS Libraries](https://docs.inrupt.com/developer-tools/javascript/client-libraries/)
+- [Comunica](https://github.com/comunica/comunica)
 
 Tentative/Maybe
 
@@ -20,8 +21,6 @@ Tentative/Maybe
 - [Relay](https://relay.dev/)? > wouldn't know why
 - Code check? >> ESLint?
 - Code format? [Prettiered](https://github.com/fsouza/prettierd) 
-
-## Make Comunica work
 
 ## Icons
 
