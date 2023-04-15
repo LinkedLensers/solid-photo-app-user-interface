@@ -1,34 +1,46 @@
+import { useState } from 'react';
 import beadyEyes from '../assets/beady-eyes.png'
 import Button from "./_Button";
 
 const Gallery = () => {
+	const [filesUploaded, setFilesUploaded] = useState(false);
 
 	// TODO: filepicker/upload
-	 //
-	 //
-    const uploadFiles = () => {
-        console.log('uploadFiles clicked')
-    }
+	// no images : show the upload button in the center
+	// images : show the upload button as floating button in the corner?
+	const uploadFiles = () => {
+		setFilesUploaded(true)
+		console.log('uploadFiles clicked')
+	}
 
 	const n = 6; // Or something else
 
-	const img = <picture className='aspect-square w-16 bg-white'>
+	const img = <picture
+		className='aspect-square w-16 bg-white'>
 		<img src={beadyEyes} alt="" />
 	</picture>;
+
+	const imageList = <div
+		className='columns-md gap-0'>
+		{
+			// create element n times
+			// https://stackoverflow.com/questions/34189370/how-to-repeat-an-element-n-times-using-jsx-and-lodash
+			[...Array(n)].map((e, i) => img)
+		}
+	</div>
 
 	return (
 		<div className="bg-green-200">
 			<p className="">
 				Gallery
 			</p>
-        <Button click={uploadFiles} style='bg-black' name='Upload' />
-			<div className='columns-md gap-0'>
-				{
-					// create element n times
-					// https://stackoverflow.com/questions/34189370/how-to-repeat-an-element-n-times-using-jsx-and-lodash
-					[...Array(n)].map((e, i) => img)
-				}
-			</div>
+			<Button
+				click={uploadFiles}
+				style='bg-solid text-white p-2 m-2 italic font-medium'
+				name='Upload Images' />
+			{/* List of images, dummy: only show after upload */
+				filesUploaded ? imageList : null}
+
 		</div>
 	);
 
