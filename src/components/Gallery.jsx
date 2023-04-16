@@ -15,14 +15,14 @@ const Gallery = () => {
 
 	const n = 6; // Or something else
 
-	const img = <div className='bg-white p-4 m-4 w-36'><picture
+	const img = <div className='bg-white p-2 w-36'><picture
 		className='aspect-square'>
 		<img src={beadyEyes} alt="" />
 	</picture></div>;
 
 
 	const imageList = <div
-		className='flex flex-row flex-wrap bg-yellow-200'>
+		className='flex flex-row flex-wrap gap-2 bg-yellow-200'>
 		{
 			// create element n times
 			// https://stackoverflow.com/questions/34189370/how-to-repeat-an-element-n-times-using-jsx-and-lodash
