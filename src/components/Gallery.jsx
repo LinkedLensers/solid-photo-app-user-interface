@@ -4,6 +4,8 @@ import Button from "./_Button";
 
 const n = 6; // number of images to show (Debug)
 
+// TODO: split into smaller components; keep this clean and pure!
+
 const Gallery = () => {
   const [filesUploaded, setFilesUploaded] = useState(false);
 
@@ -15,6 +17,7 @@ const Gallery = () => {
     console.log("uploadFiles clicked");
   };
 
+    // TODO: pass data: img + description
   const showImageDetails = () => {
     alert("test");
   };
