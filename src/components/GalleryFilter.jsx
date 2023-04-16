@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// What are we filtering for? Name? Occurence of string in triples?
+
 const GalleryFilter = () => {
   const [filterString, setFilterString] = useState("");
 
