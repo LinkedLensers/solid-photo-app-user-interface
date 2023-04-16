@@ -1,6 +1,7 @@
 import { useState } from "react";
 import beadyEyes from "../assets/beady-eyes.png";
 import Button from "./_Button";
+import GalleryFilter from "./GalleryFilter";
 
 const n = 6; // number of images to show (Debug)
 
@@ -45,9 +46,10 @@ const Gallery = () => {
       <p className="">Gallery</p>
       <Button
         click={uploadFiles}
-        style="bg-solid text-white p-2 m-2 italic font-medium"
+        style="bg-solid text-white p-2 italic font-medium"
         name="Upload Images"
       />
+      <GalleryFilter/>
       {
         /* List of images, dummy: only show after upload */
         filesUploaded ? imageList : null
