@@ -11,7 +11,7 @@ function App() {
       <div className="container h-screen mx-auto px-4 bg-red-100">
         <Header />
         <Gallery />
-        <Comunica />
+        {/* <Comunica /> */}
       </div>
     </div>
   );
