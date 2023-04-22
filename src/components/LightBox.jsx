@@ -1,6 +1,10 @@
 import React from 'react';
 import { useState } from "react";
 
+// TODO show picture description/data
+// TODO allow edition of picture description/data
+// MAYBE add download button
+
 const LightBox = ({ children, data, Wrapper = 'div', zIndex = 100 }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
     console.log(data)
