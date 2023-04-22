@@ -13,22 +13,11 @@ return (
 		<Wrapper onClick={toggleIsOpen}>
 			{children}
 			{isOpen ?
-				<div onClick={toggleIsOpen} style={{
-					position: 'fixed',
-					top: '0',
-					left: '0',
-					height: '100vh',
-					width: '100vw',
-					backgroundColor: 'rgba(0,0,0,0.7)',
-					cursor: 'pointer',
-					zIndex
-				}}>
+				<div onClick={toggleIsOpen}
+              className="absolute top-0 left-0 w-screen h-screen z-50 cursor-pointer bg-black">
 				  <img src={data.src}
 						 alt={data.alt}
-						style={{
-							height: '100%',
-							width: 'auto'
-						}}
+                className="mx-auto h-full"
 					/>
 				</div>
 				: null}
