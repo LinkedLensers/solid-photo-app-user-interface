@@ -1,4 +1,3 @@
-import Button from "./_Button";
 
 // Predefined filters/searches for dateAdded, tags, ...
 
