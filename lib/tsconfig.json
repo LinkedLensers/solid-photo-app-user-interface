@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es2015",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "outDir": "dist/"
+  },
+  "include": [
+    "src-solid-backend"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
