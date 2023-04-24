@@ -23,7 +23,7 @@ export default function SolidAuth() {
     session.login({
       oidcIssuer: idp,
       redirectUrl: window.location.href,
-      clientName: "Webdevelopment Practicum 3 React Template"
+      clientName: "Solid Photo App"
     })
   }
 
