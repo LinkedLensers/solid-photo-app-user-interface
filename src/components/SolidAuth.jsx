@@ -46,11 +46,10 @@ export default function SolidAuth() {
   } else {
     // If session is logged in, you should not be here
     return (
-      <div>
-        <p style={{display: "inline-block", marginRight: "1em"}}>
-          Logged in as: { session.info.webId }
-        </p>
-        <button onClick={ handleLogout }>Logout</button>
+      <div className="bg-white flex h-full p-1">
+        <p className=''>Logged in as</p>
+        <p className='grow underline italic pl-1 pr-1'>{ session.info.webId }</p>
+        <button onClick={ handleLogout } className='text-solid font-semibold'>Logout</button>
       </div>
 
     )
