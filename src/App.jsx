@@ -28,6 +28,8 @@ function App() {
     session.onLogin(() => setLoggedIn(true));
     session.onLogout(() => setLoggedIn(false));
 
+    console.log(session);
+
     // Deze functie gaat na of we teruggestuurd zijn
     // naar de huidige pagina door de Solid login pagina.
     handleIncomingRedirect({ restorePreviousSession: true })
@@ -59,17 +61,17 @@ function App() {
                   <Gallery />
 
                   <button
+                    className="bg-orange-300 text-black p-1 border-white border-2"
                     onClick={async (event) => {
                       await initialize({
-                        webid:
-                          "https://woslabbi.pod.knows.idlab.ugent.be/profile/card#me",
+                        webid: session.info.webId,
                         fetch: fetch,
                       });
                     }}
                   >
-                    testInit
+                    Test Init
                   </button>
-                  <Comunica />
+                  {/* <Comunica /> */}
                 </div>
               )}
             </div>
