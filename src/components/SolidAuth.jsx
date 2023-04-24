@@ -36,16 +36,10 @@ export default function SolidAuth() {
     // If session is not logged in, show the login screen
     return (
       <div >
-        <form onSubmit={handleLogin} style={{
-          "display": "flex",
-          "margin": "10%",
-          "height": "100%",
-          "flexDirection": "column"
-        }}>
-          <input type="text" placeholder="identity provider" style={{
-              marginBottom: "1em"
-          }}/>
-          <input type="submit" value="Login"/>
+        <form onSubmit={handleLogin}
+          className="bg-white flex flex-row h-full p-2">
+          <input type="text" placeholder="https:// your identity provider" className="grow" />
+          <input type="submit" className='text-solid font-semibold' value="Login"/>
         </form>
       </div>
     )
