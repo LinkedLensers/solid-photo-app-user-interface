@@ -1,0 +1,1 @@
+{"version":3,"file":"Initialize.js","sourceRoot":"","sources":["../src-solid-backend/Initialize.ts"],"names":[],"mappings":";;;;;;;;;AAEA;;;GAGG;AACH,MAAM,UAAgB,UAAU,CAAC,OAGhC;;QACG,OAAO,CAAC,GAAG,CAAC,oBAAoB,EAAE,OAAO,CAAC,KAAK,CAAC,CAAA;QAChD,MAAM,QAAQ,GAAG,MAAM,KAAK,CAAC,OAAO,CAAC,KAAK,CAAC,CAAA;QAC3C,OAAO,CAAC,GAAG,CAAC,MAAM,QAAQ,CAAC,IAAI,EAAE,CAAC,CAAA;IACtC,CAAC;CAAA"}
