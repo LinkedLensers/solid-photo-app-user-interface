@@ -1,3 +1,5 @@
+import { UrlRoutes } from "./Util";
+import ExifReader from 'exifreader';
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -17,7 +19,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 export function addImage(image, // image
 options) {
     return __awaiter(this, void 0, void 0, function* () {
-        throw Error('not implemented yet');
+        // get photo URL
+        const urls = new UrlRoutes(options.webid);
+        yield urls.init(options);
+        // upload image
+        const response = yield options.fetch(urls.photoContainer, {
+            method: "POST",
+            headers: {
+                'content-type': 'image/jpeg'
+            },
+            body: image.plainFile
+        });
+        const location = response.headers.get("location");
+        // TODO: extract metadata
+        // Note: I think we have to deep copy
+        const tags = yield ExifReader.load(image.plainFile, { includeUnknown: true, expanded: true });
+        console.log(Object.keys(tags));
+        console.log(tags['exif']);
+        return { imageURL: location,
+            metadata: undefined,
+            metadataRaw: [] };
     });
 }
 /**
@@ -28,7 +49,12 @@ options) {
 export function addImages(images, // list of images; uploaded in frontend
 options) {
     return __awaiter(this, void 0, void 0, function* () {
-        throw Error('not implemented yet');
+        const solidImages = [];
+        for (const image of images) {
+            const solidImage = yield addImage(image, options);
+            solidImages.push(solidImage);
+        }
+        return solidImages;
     });
 }
 /**
