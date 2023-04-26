@@ -42,8 +42,16 @@ function App() {
         let status = info?.isLoggedIn || false;
         if (status !== loggedIn) setLoggedIn(status);
         if (info) setCheckingLogin(false);
+        if (loggedIn) init();
       })
       .catch(console.error);
+
+    const init = async () => {
+      await initialize({
+        webid: session.info.webId,
+        fetch: session.fetch,
+      });
+    };
   });
 
   return (
@@ -60,17 +68,6 @@ function App() {
                 <div>
                   <Gallery />
 
-                  <button
-                    className="bg-orange-300 text-black p-1 border-white border-2"
-                    onClick={async (event) => {
-                      await initialize({
-                        webid: session.info.webId,
-                        fetch: session.fetch,
-                      });
-                    }}
-                  >
-                    Test Init
-                  </button>
                   {/* <Comunica /> */}
                 </div>
               )}
