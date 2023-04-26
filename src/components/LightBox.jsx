@@ -7,7 +7,6 @@ import { useState } from "react";
 
 const LightBox = ({ children, data, Wrapper = 'div', zIndex = 100 }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
-    console.log(data)
 
 	const toggleIsOpen = () => {
 		setIsOpen(!isOpen);

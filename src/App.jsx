@@ -3,7 +3,6 @@ import Header from "./components/Header";
 import Gallery from "./components/Gallery";
 import Comunica from "./components/Comunica";
 import { initialize } from "./solid-backend/index";
-
 import {
   handleIncomingRedirect,
   getDefaultSession,
