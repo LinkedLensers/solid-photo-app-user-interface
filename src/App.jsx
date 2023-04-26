@@ -65,7 +65,7 @@ function App() {
                     onClick={async (event) => {
                       await initialize({
                         webid: session.info.webId,
-                        fetch: fetch,
+                        fetch: session.fetch,
                       });
                     }}
                   >
