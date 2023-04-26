@@ -1,6 +1,6 @@
 import { useFilePicker } from "use-file-picker";
 import React from "react";
-//import { addImages } from "SolidCalls";
+import { addImages } from "../solid-backend/SolidCalls";
 
 const FileUploader = () => {
   /**
@@ -10,8 +10,8 @@ const FileUploader = () => {
     console.log("uploaded successfully");
     console.log(data);
     // TODO: convert to upload format?
-    // TODO: upload to Solid
-    //addImages(); // FIXME
+	 // TODO: get metadata?
+    addImages();
   };
 
   /**
