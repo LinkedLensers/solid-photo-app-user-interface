@@ -15,22 +15,23 @@ function App() {
   const session = getDefaultSession();
 
   const [loggedIn, setLoggedIn] = useState(session.info.isLoggedIn);
-  const [checkingLogin, setCheckingLogin] = useState(true);
+const [checkingLogin, setCheckingLogin] = useState(true);
+
 
   useEffect(() => {
+
     session.onLogin(() => setLoggedIn(true));
     session.onLogout(() => setLoggedIn(false));
 
     console.log(session);
 
+  
     handleIncomingRedirect({ restorePreviousSession: true })
       .then((info) => {
         // https://docs.inrupt.com/developer-tools/api/javascript/solid-client-authn-browser/functions.html#handleincomingredirect
         let status = info?.isLoggedIn || false;
         if (status !== loggedIn) setLoggedIn(status);
         if (info) setCheckingLogin(false);
-        // run initialize exactly once, when the component is loaded
-        // TODO don't run it if it is not needed? -- does it do harm if run multiple times?
 
         if (loggedIn) init();
       })

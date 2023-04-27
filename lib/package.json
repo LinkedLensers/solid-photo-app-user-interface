@@ -1,6 +1,6 @@
 {
   "name": "solid-backend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "copy": "rm -r ../src/solid-backend/* && npm run build && cp -r ./dist/* ../src/solid-backend/"
   },
   "dependencies": {
-    "n3": "^1.16.4"
+    "n3": "^1.16.4",
+    "typescript": "^5.0.4"
   }
 }

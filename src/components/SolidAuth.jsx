@@ -37,7 +37,7 @@ export default function SolidAuth() {
     return (
       <div >
         <form onSubmit={handleLogin}
-          className="bg-white flex flex-row h-full p-2">
+          className="bg-white flex flex-row flex-wrap h-full p-2">
           <input type="text" placeholder="https:// your identity provider" className="grow" />
           <input type="submit" className='text-solid font-semibold' value="Login"/>
         </form>
@@ -46,7 +46,7 @@ export default function SolidAuth() {
   } else {
     // If session is logged in, you should not be here
     return (
-      <div className="bg-white flex h-full p-1">
+      <div className="bg-white flex flex-wrap h-full p-1">
         <p className=''>Logged in as</p>
         <p className='grow underline italic pl-1 pr-1'>{ session.info.webId }</p>
         <button onClick={ handleLogout } className='text-solid font-semibold'>Logout</button>
