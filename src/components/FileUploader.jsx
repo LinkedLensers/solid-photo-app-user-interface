@@ -4,7 +4,6 @@ import React from "react";
 import {getDefaultSession} from "@inrupt/solid-client-authn-browser";
 import {UrlRoutes} from "../solid-backend/Util";
 import {addImage, addImages} from "../solid-backend";
-import ExifReader from "exifreader";
 
 const FileUploader = () => {
     /**

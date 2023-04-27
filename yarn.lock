@@ -4476,6 +4476,11 @@
     "@webassemblyjs/ast" "1.11.1"
     "@xtuc/long" "4.2.2"
 
+"@xmldom/xmldom@^0.7.8":
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.10.tgz#b1f4a7dc63ac35b2750847644d5dacf5b4ead12f"
+  integrity sha512-hb9QhOg5MGmpVkFcoZ9XJMe1em5gd0e2eqqjK87O1dwULedXsnY/Zg/Ju6lcohA+t6jVkmKpe7I1etqhvdRdrQ==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@xtuc/ieee754/-/ieee754-1.2.0.tgz"
@@ -6614,6 +6619,13 @@ execa@^5.0.0:
     onetime "^5.1.2"
     signal-exit "^3.0.3"
     strip-final-newline "^2.0.0"
+
+exifreader@^4.12.0:
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/exifreader/-/exifreader-4.12.0.tgz#e3857f39f54b73b84549e9a9e114f292e85bb87a"
+  integrity sha512-aRSmNyw2c6f6qPK4jmC56W/5XePDN7LVwt8tQjgMchxoY3MCxqEToegirKdS7A3CYCWAOPehfypMZWGWxtLhzw==
+  optionalDependencies:
+    "@xmldom/xmldom" "^0.7.8"
 
 exit@^0.1.2:
   version "0.1.2"
@@ -10896,9 +10908,10 @@ sockjs@^0.3.24:
     websocket-driver "^0.7.4"
 
 "solid-backend@file:./lib":
-  version "0.0.1"
+  version "0.0.2"
   dependencies:
     n3 "^1.16.4"
+    typescript "^5.0.4"
 
 source-list-map@^2.0.0, source-list-map@^2.0.1:
   version "2.0.1"
@@ -11654,6 +11667,11 @@ typedarray-to-buffer@^3.1.5:
   integrity sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==
   dependencies:
     is-typedarray "^1.0.0"
+
+typescript@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.4.tgz#b217fd20119bd61a94d4011274e0ab369058da3b"
+  integrity sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
