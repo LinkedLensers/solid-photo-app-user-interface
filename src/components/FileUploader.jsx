@@ -26,6 +26,7 @@ const FileUploader = () => {
             for (const solidImage of solidImages) {
                 // log location
                 console.log(solidImage.imageURL)
+                // TODO show user that upload was successful (toast?)
             }
         })
         // ExifReader.load(data.plainFiles[0], {includeUnknown: true, expanded: true}).then(async (tags) => {
@@ -52,6 +53,7 @@ const FileUploader = () => {
         onFilesRejected: (data) => console.log(data),
     });
 
+    // TODO error handling when upload fails?
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -74,8 +76,7 @@ const FileUploader = () => {
             {filesContent.map((file, index) => (
                 <div key={index}>
                     <h2>{file.name}</h2>
-                    <img alt={file.name} src={file.content}></img>
-                    <br/>
+                    {/* <img alt={file.name} src={file.content}></img> */}
                 </div>
             ))}
         </div>
