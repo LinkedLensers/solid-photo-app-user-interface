@@ -27,6 +27,20 @@ const Gallery = () => {
         fetch:session.fetch,
         webid: session.info.webId
     });
+      images.then(async list => {
+          console.log('Fetching all images')
+          console.log(list)
+
+          for (const solidImage of list) {
+              // TODO:
+              // fetch image
+              const response = await session.fetch(solidImage.imageURL)
+              console.log(response)
+              console.log(await response.text()) // looks like raw image data
+              console.log(response.headers.get('content-type'))
+              // put image in gallery or sth
+          }
+      })
     setImages([data]);
     // setImages(images); // FIXME
   }, []);

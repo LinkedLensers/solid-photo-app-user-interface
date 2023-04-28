@@ -156,8 +156,9 @@ export async function listImages(
             metadataRaw: store.getQuads(subject, null, null, null)
         })
     }
-    console.log(solidImages)
-    return solidImages
+
+    // Note: does not filter yet
+    return solidImages.slice(0,amount)
 }
 
 /**
