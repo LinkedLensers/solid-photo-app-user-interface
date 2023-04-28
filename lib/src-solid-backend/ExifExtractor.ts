@@ -42,7 +42,11 @@ export class SemanticImage implements ToRdf {
                 factory.literal(this.location.longitude.toString(),
                     factory.namedNode(Vocabulary.Double)));
             rdfDescription.push(longitude);
-
+            // wkt string
+            const geowkt = factory.quad(subject, factory.namedNode('http://example.org/location'),
+                factory.literal(`POINT (${this.location.longitude.toString()} ${this.location.latitude.toString()})`,
+                    factory.namedNode('http://www.opengis.net/ont/geosparql#wktLiteral')));
+            rdfDescription.push(geowkt);
         }
         return rdfDescription;
     }
