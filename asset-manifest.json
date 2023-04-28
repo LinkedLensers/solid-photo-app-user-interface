@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/solid-photo-app-user-interface/static/css/main.b5d7f245.css",
-    "main.js": "/solid-photo-app-user-interface/static/js/main.a5b0a91c.js",
+    "main.css": "/solid-photo-app-user-interface/static/css/main.4bc2eea2.css",
+    "main.js": "/solid-photo-app-user-interface/static/js/main.588f6a27.js",
     "static/media/beady-eyes.png": "/solid-photo-app-user-interface/static/media/beady-eyes.5a7946b0fdda6d6d0d7d.png",
     "index.html": "/solid-photo-app-user-interface/index.html",
-    "main.b5d7f245.css.map": "/solid-photo-app-user-interface/static/css/main.b5d7f245.css.map",
-    "main.a5b0a91c.js.map": "/solid-photo-app-user-interface/static/js/main.a5b0a91c.js.map"
+    "main.4bc2eea2.css.map": "/solid-photo-app-user-interface/static/css/main.4bc2eea2.css.map",
+    "main.588f6a27.js.map": "/solid-photo-app-user-interface/static/js/main.588f6a27.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5d7f245.css",
-    "static/js/main.a5b0a91c.js"
+    "static/css/main.4bc2eea2.css",
+    "static/js/main.588f6a27.js"
   ]
 }
