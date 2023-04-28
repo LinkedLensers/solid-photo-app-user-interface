@@ -64,6 +64,7 @@ const [checkingLogin, setCheckingLogin] = useState(true);
             </div>
           )}
         </div>
+        <p className='p-2 text-sm italic'>Made by Wout Slabbinck, Jonas Steinbach, Bryan-Elliott Tam and Ruben Dedecker for the Inrupt Solid Hackathon 2023.</p>
       </div>
     </div>
   );
