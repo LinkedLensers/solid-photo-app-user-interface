@@ -1,8 +1,10 @@
-import { Fetch } from "./interfaces/Types";
-import { Quad } from "n3";
-import { SolidImage } from './interfaces/SolidImage'
+import {Fetch} from "./interfaces/Types";
+import {Quad, Store, Writer} from "n3";
+import {ImageMetadata, SolidImage} from './interfaces/SolidImage'
 import {UrlRoutes} from "./Util";
 import * as ExifReader from 'exifreader'
+import {SemanticImage} from "./ExifExtractor";
+import * as url from "url";
 
 /**
  * Extract image metadata
@@ -12,34 +14,56 @@ import * as ExifReader from 'exifreader'
  * @param options
  */
 export async function addImage(
-    image: { plainFile: any, fileContent: any  }, // image
+    image: { plainFile: any, fileContent: any }, // image
     options: {
         webid: string,
         fetch: Fetch
     }
 ): Promise<SolidImage> { // returns the location url + metadata
+    const tags = await ExifReader.load(image.plainFile, {includeUnknown: true, expanded: true});
 
-    const cloneImagePlainFile = structuredClone(image.plainFile)
     // get photo URL
     const urls = new UrlRoutes(options.webid)
     await urls.init(options);
+
     // upload image
     const response = await options.fetch(urls.photoContainer, {
         method: "POST",
         headers: {
-            'content-type':'image/jpeg'
+            'content-type': 'image/jpeg'
         },
-        body:image.plainFile
-
+        body: image.plainFile
     })
+
     const location = response.headers.get("location");
-    // Note: I think we have to deep copy
-    const tags =await  ExifReader.load(cloneImagePlainFile, {includeUnknown: true, expanded: true})
-    console.log(Object.keys(tags));
-    console.log(tags['exif'])
-    return {imageURL: location,
-        metadata: undefined,
-        metadataRaw: []}
+
+    // extract metadata
+    const fileName = image.fileContent['name'].split(".").slice(0,-1).join()
+    const semanticImage = new SemanticImage(tags, fileName)
+    await semanticImage.build()
+
+    const metadata: ImageMetadata = {
+        createdDate: semanticImage.getDate(),
+        location: semanticImage.getLocation(),
+        name: fileName,
+        tags: [...semanticImage.getTags()]
+    }
+
+    const solidImage: SolidImage = {
+        imageURL: location,
+        metadata: metadata,
+        metadataRaw: new Store(semanticImage.toRdf(location)).getQuads(null, null, null, null)
+    }
+    await options.fetch(urls.photoIndex, {
+        method: "PATCH",
+        headers: {
+            'content-type': 'application/sparql-update'
+        },
+        body: `INSERT DATA {
+            ${new Writer().quadsToString(solidImage.metadataRaw)}
+        }`
+    })
+    return solidImage
 }
 
 

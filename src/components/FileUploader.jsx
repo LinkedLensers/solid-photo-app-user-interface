@@ -4,7 +4,7 @@ import React from "react";
 import {getDefaultSession} from "@inrupt/solid-client-authn-browser";
 import {UrlRoutes} from "../solid-backend/Util";
 import {addImage, addImages} from "../solid-backend";
-
+import ExifReader from "exifreader"
 const FileUploader = () => {
     /**
      * Upload images (to the Solid backend)
@@ -22,18 +22,19 @@ const FileUploader = () => {
                 {plainFile: data.plainFiles[i], fileContent: data.filesContent[i]},
             )
         }
-        addImages(images, {fetch: session.fetch, webid: session.info.webId}).then(solidImages => {
-            for (const solidImage of solidImages) {
-                // log location
-                console.log(solidImage.imageURL)
-                // TODO show user that upload was successful (toast?)
-            }
-        })
         // ExifReader.load(data.plainFiles[0], {includeUnknown: true, expanded: true}).then(async (tags) => {
         //     console.log(Object.keys(tags));
         //     console.log(tags['exif'])
         //     console.log(tags['file'])
         // })
+        addImages(images, {fetch: session.fetch, webid: session.info.webId}).then(solidImages => {
+            for (const solidImage of solidImages) {
+                // log location
+                console.log(solidImage)
+                console.log(solidImage)
+            }
+        })
+
     };
 
     /**

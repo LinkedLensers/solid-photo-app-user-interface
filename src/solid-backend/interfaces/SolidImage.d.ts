@@ -71,5 +71,5 @@ export type Coordinate = {
      *
      * {@link https://en.wikipedia.org/wiki/Elevation Definition}
      */
-    elevation: number;
+    elevation?: number;
 };

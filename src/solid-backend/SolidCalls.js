@@ -1,6 +1,8 @@
 import { __awaiter } from "tslib";
+import { Store, Writer } from "n3";
 import { UrlRoutes } from "./Util";
 import * as ExifReader from 'exifreader';
+import { SemanticImage } from "./ExifExtractor";
 /**
  * Extract image metadata
  * Add image to the /photos/ container
@@ -11,7 +13,7 @@ import * as ExifReader from 'exifreader';
 export function addImage(image, // image
 options) {
     return __awaiter(this, void 0, void 0, function* () {
-        const cloneImagePlainFile = structuredClone(image.plainFile);
+        const tags = yield ExifReader.load(image.plainFile, { includeUnknown: true, expanded: true });
         // get photo URL
         const urls = new UrlRoutes(options.webid);
         yield urls.init(options);
@@ -24,13 +26,31 @@ options) {
             body: image.plainFile
         });
         const location = response.headers.get("location");
-        // Note: I think we have to deep copy
-        const tags = yield ExifReader.load(cloneImagePlainFile, { includeUnknown: true, expanded: true });
-        console.log(Object.keys(tags));
-        console.log(tags['exif']);
-        return { imageURL: location,
-            metadata: undefined,
-            metadataRaw: [] };
+        // extract metadata
+        const fileName = image.fileContent['name'].split(".").slice(0, -1).join();
+        const semanticImage = new SemanticImage(tags, fileName);
+        yield semanticImage.build();
+        const metadata = {
+            createdDate: semanticImage.getDate(),
+            location: semanticImage.getLocation(),
+            name: fileName,
+            tags: [...semanticImage.getTags()]
+        };
+        const solidImage = {
+            imageURL: location,
+            metadata: metadata,
+            metadataRaw: new Store(semanticImage.toRdf(location)).getQuads(null, null, null, null)
+        };
+        yield options.fetch(urls.photoIndex, {
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/sparql-update'
+            },
+            body: `INSERT DATA {
+            ${new Writer().quadsToString(solidImage.metadataRaw)}
+        }`
+        });
+        return solidImage;
     });
 }
 /**
