@@ -32,8 +32,8 @@ const FileUploader = () => {
                 // log location
                 // console.log(solidImage.imageURL)
             }
+            window.location.reload() // Note: this is not performant at all
         })
-
     };
 
     /**
