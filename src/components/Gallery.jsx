@@ -41,6 +41,7 @@ const Gallery = () => {
                     src: imageObjectURL,
                     alt: solidImage.metadata.name,
                     key: solidImage.metadata.name,
+                    solidImage: solidImage
                 }
                 imagesList.push(dataElement)
             }
