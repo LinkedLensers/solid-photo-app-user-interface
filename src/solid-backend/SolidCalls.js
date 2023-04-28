@@ -1,6 +1,6 @@
 import { __awaiter } from "tslib";
 import { Store, Writer } from "n3";
-import { UrlRoutes } from "./Util";
+import { parseResponse, UrlRoutes } from "./Util";
 import * as ExifReader from 'exifreader';
 import { SemanticImage } from "./ExifExtractor";
 /**
@@ -94,7 +94,35 @@ export function editMetadata(solidImage, options) {
  */
 export function listImages(amount, filterOptions, options) {
     return __awaiter(this, void 0, void 0, function* () {
-        throw Error('not implemented yet');
+        // get photo URL
+        const urls = new UrlRoutes(options.webid);
+        yield urls.init(options);
+        // fetch metadata
+        const response = yield options.fetch(urls.photoIndex);
+        const store = yield parseResponse(response);
+        // parse metadata
+        const subjects = store.getSubjects(null, null, null);
+        const solidImages = [];
+        for (const subject of subjects) {
+            const dates = store.getObjects(subject, "http://purl.org/dc/terms/date", null);
+            const longitudes = store.getObjects(subject, "http://www.w3.org/2003/01/geo/wgs84_pos#long", null);
+            const latitudes = store.getObjects(subject, "http://www.w3.org/2003/01/geo/wgs84_pos#lat", null);
+            const names = store.getObjects(subject, "http://example.org/name", null);
+            solidImages.push({
+                imageURL: subject.value,
+                metadata: {
+                    createdDate: dates.length === 1 ? new Date(dates[0].value) : undefined,
+                    location: longitudes.length === 1 && latitudes.length === 1 ? {
+                        longitude: parseFloat(longitudes[0].value),
+                        latitude: parseFloat(latitudes[0].value)
+                    } : undefined,
+                    name: names[0].value
+                },
+                metadataRaw: store.getQuads(subject, null, null, null)
+            });
+        }
+        console.log(solidImages);
+        return solidImages;
     });
 }
 /**

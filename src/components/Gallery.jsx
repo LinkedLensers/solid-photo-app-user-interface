@@ -7,6 +7,7 @@ import GalleryPredefinedFilters from "./GalleryPredefinedFilters";
 import beadyEyes from "../assets/beady-eyes.png";
 import { listImages } from "./../solid-backend/SolidCalls";
 import { useEffect, useState } from "react";
+import {getDefaultSession} from "@inrupt/solid-client-authn-browser";
 
 const data = {
   src: beadyEyes,
@@ -21,7 +22,11 @@ const data = {
 const Gallery = () => {
   const [images, setImages] = useState([]);
   useEffect(() => {
-    const images = listImages(100000, {}, {});
+      const session = getDefaultSession()
+    const images = listImages(100000, {}, {
+        fetch:session.fetch,
+        webid: session.info.webId
+    });
     setImages([data]);
     // setImages(images); // FIXME
   }, []);

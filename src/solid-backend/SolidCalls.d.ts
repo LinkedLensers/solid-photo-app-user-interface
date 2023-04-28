@@ -53,6 +53,7 @@ type FilterOptions = {
  */
 export declare function listImages(amount: number, filterOptions: FilterOptions, options: {
     fetch: Fetch;
+    webid: string;
 }): Promise<SolidImage[]>;
 /**
  * Copy the image with a random UUID to /photos/sharing/
