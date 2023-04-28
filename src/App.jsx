@@ -45,8 +45,8 @@ const [checkingLogin, setCheckingLogin] = useState(true);
   });
 
   return (
-    <div className="bg-blue-100 w-screen h-screen">
-      <div className="container h-screen mx-auto px-4 bg-red-100">
+    <div className="bg-purple-50 w-screen h-screen">
+      <div className="container h-screen mx-auto bg-yellow-100">
         <Header />
         <div>
           {checkingLogin ? (

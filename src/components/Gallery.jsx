@@ -51,7 +51,7 @@ const Gallery = () => {
     }, []);
 
     const lightboxes = () =>
-        // TODO add key (filename?)
+          // TODO show loading indicator
         images.map((img) => {
             console.log(img);
             return (
@@ -63,11 +63,10 @@ const Gallery = () => {
 
     return (
         <div className="bg-green-200">
-            <p className="">Gallery</p>
             <FileUploader/>
             <PhotoGallery/>
-            <GalleryFilter/>
-            <GalleryPredefinedFilters/>
+            {/* <GalleryFilter/> */}
+            {/* <GalleryPredefinedFilters/> */}
             <div className="flex flex-row flex-wrap gap-2 bg-yellow-200">
                 {lightboxes()}
             </div>
