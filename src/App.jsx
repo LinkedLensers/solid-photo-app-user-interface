@@ -25,7 +25,7 @@ const [checkingLogin, setCheckingLogin] = useState(true);
 
     console.log(session);
 
-  
+
     handleIncomingRedirect({ restorePreviousSession: true })
       .then((info) => {
         // https://docs.inrupt.com/developer-tools/api/javascript/solid-client-authn-browser/functions.html#handleincomingredirect
@@ -40,7 +40,7 @@ const [checkingLogin, setCheckingLogin] = useState(true);
     const init = async () =>
       await initialize({
         webid: session.info.webId,
-        fetch: fetch,
+        fetch: session.fetch,
       });
   });
 
