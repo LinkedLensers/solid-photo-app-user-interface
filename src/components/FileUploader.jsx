@@ -30,8 +30,7 @@ const FileUploader = () => {
         addImages(images, {fetch: session.fetch, webid: session.info.webId}).then(solidImages => {
             for (const solidImage of solidImages) {
                 // log location
-                console.log(solidImage)
-                console.log(solidImage)
+                // console.log(solidImage.imageURL)
             }
         })
 

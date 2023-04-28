@@ -18,7 +18,7 @@ export class SemanticImage {
         const imagesType = factory.quad(subject, factory.namedNode(Vocabulary.Type), factory.namedNode(Vocabulary.Image));
         rdfDescription.push(imagesType);
         if (this.date) {
-            const datePublication = factory.quad(subject, factory.namedNode(Vocabulary.Date), factory.literal(this.date.toString(), factory.namedNode(Vocabulary.DateTime)));
+            const datePublication = factory.quad(subject, factory.namedNode(Vocabulary.Date), factory.literal(this.date.toISOString(), factory.namedNode(Vocabulary.DateTime)));
             rdfDescription.push(datePublication);
         }
         if (this.location) {
@@ -26,7 +26,12 @@ export class SemanticImage {
             rdfDescription.push(latitude);
             const longitude = factory.quad(subject, factory.namedNode(Vocabulary.Longitude), factory.literal(this.location.longitude.toString(), factory.namedNode(Vocabulary.Double)));
             rdfDescription.push(longitude);
+            // wkt string
+            const geowkt = factory.quad(subject, factory.namedNode('http://example.org/location'), factory.literal(`POINT (${this.location.longitude.toString()} ${this.location.latitude.toString()})`, factory.namedNode('http://www.opengis.net/ont/geosparql#wktLiteral')));
+            rdfDescription.push(geowkt);
         }
+        const name = factory.quad(subject, factory.namedNode('http://example.org/name'), factory.literal(this.name));
+        rdfDescription.push(name);
         return rdfDescription;
     }
     addTags(tag) {

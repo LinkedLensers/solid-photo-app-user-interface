@@ -1,7 +1,7 @@
 import {Fetch} from "./interfaces/Types";
 import {Quad, Store, Writer} from "n3";
 import {ImageMetadata, SolidImage} from './interfaces/SolidImage'
-import {UrlRoutes} from "./Util";
+import {parseResponse, UrlRoutes} from "./Util";
 import * as ExifReader from 'exifreader'
 import {SemanticImage} from "./ExifExtractor";
 import * as url from "url";
@@ -38,7 +38,7 @@ export async function addImage(
     const location = response.headers.get("location");
 
     // extract metadata
-    const fileName = image.fileContent['name'].split(".").slice(0,-1).join()
+    const fileName = image.fileContent['name'].split(".").slice(0, -1).join()
     const semanticImage = new SemanticImage(tags, fileName)
     await semanticImage.build()
 
@@ -124,9 +124,41 @@ export async function listImages(
     amount: number,
     filterOptions: FilterOptions,
     options: {
-        fetch: Fetch
+        fetch: Fetch,
+        webid: string
     }): Promise<SolidImage[]> {
-    throw Error('not implemented yet')
+    // get photo URL
+    const urls = new UrlRoutes(options.webid)
+    await urls.init(options);
+
+    // fetch metadata
+    const response = await options.fetch(urls.photoIndex)
+    const store = await parseResponse(response)
+
+    // parse metadata
+    const subjects = store.getSubjects(null, null, null)
+    const solidImages: SolidImage[] = []
+    for (const subject of subjects) {
+        const dates = store.getObjects(subject, "http://purl.org/dc/terms/date", null)
+        const longitudes = store.getObjects(subject, "http://www.w3.org/2003/01/geo/wgs84_pos#long", null)
+        const latitudes = store.getObjects(subject, "http://www.w3.org/2003/01/geo/wgs84_pos#lat", null)
+        const names = store.getObjects(subject, "http://example.org/name", null)
+        solidImages.push({
+            imageURL: subject.value,
+            metadata: {
+                createdDate: dates.length === 1 ? new Date(dates[0].value) : undefined,
+                location: longitudes.length === 1 && latitudes.length === 1 ? {
+                    longitude: parseFloat(longitudes[0].value),
+                    latitude: parseFloat(latitudes[0].value)
+                } : undefined,
+                name: names[0].value
+            },
+            metadataRaw: store.getQuads(subject, null, null, null)
+        })
+    }
+
+    // Note: does not filter yet
+    return solidImages.slice(0,amount)
 }
 
 /**
