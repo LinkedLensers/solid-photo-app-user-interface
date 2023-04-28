@@ -5,7 +5,7 @@
   "module": "./dist/index.js",
   "scripts": {
     "build": "tsc",
-    "copy": "rm -r ../src/solid-backend/* && npm run build && cp -r ./dist/* ../src/solid-backend/"
+    "copy": "npm run build && rm -r ../src/solid-backend/* && cp -r ./dist/* ../src/solid-backend/"
   },
   "dependencies": {
     "n3": "^1.16.4",

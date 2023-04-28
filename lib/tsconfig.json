@@ -4,7 +4,10 @@
     "target": "es2015",
     "sourceMap": true,
     "moduleResolution": "node",
-    "outDir": "dist/"
+    "outDir": "dist/",
+    "esModuleInterop": true,
+    "declaration": true,
+    "importHelpers": true
   },
   "include": [
     "src-solid-backend"

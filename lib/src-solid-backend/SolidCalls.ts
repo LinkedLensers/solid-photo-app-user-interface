@@ -18,6 +18,8 @@ export async function addImage(
         fetch: Fetch
     }
 ): Promise<SolidImage> { // returns the location url + metadata
+
+    const cloneImagePlainFile = structuredClone(image.plainFile)
     // get photo URL
     const urls = new UrlRoutes(options.webid)
     await urls.init(options);
@@ -31,9 +33,8 @@ export async function addImage(
 
     })
     const location = response.headers.get("location");
-    // TODO: extract metadata
     // Note: I think we have to deep copy
-    const tags =await  ExifReader.load(image.plainFile, {includeUnknown: true, expanded: true})
+    const tags =await  ExifReader.load(cloneImagePlainFile, {includeUnknown: true, expanded: true})
     console.log(Object.keys(tags));
     console.log(tags['exif'])
     return {imageURL: location,
